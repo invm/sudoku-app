@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Sudoku Game By Michael</title>
+</head>
+<body>
+<div id="root" >
+    <div id="welcome" class="visible">
+        <h1 class="header">
+            Welcome to Sudoku Master!
+        </h1>
+        <div class="buttons">
+            <button class="load-screen" id="reg-btn">Register</button>
+            <button class="load-screen" id="login-btn-main">Login</button>
+            <button class="load-screen" id="guest-btn">Play as Guest</button>
+        </div>
+    </div>
+    <div id="login" >
+        <div id="login-form">
+            <input type="text" placeholder="Enter username" id="login-username">
+            <input type="password" placeholder="Enter password" id="login-password">
+            <div id="no-such-user" class="hidden">No such user, sorry.</div>
+            <div id="pass-dont-match-on-login" class="hidden">Password does not match user, try again.</div>
+            <button id="login-btn">Login</button>
+            <button id="return-from-login">Main Menu</button>
+        </div>
+        <div id="register-form">
+                <input type="text" placeholder="Enter username" id="username">
+                <input type="password" placeholder="Enter password" id="password">
+                <input type="password" placeholder="Confirm password" id="password2">
+                <div id="pass-dont-match" class="hidden">Passwords does not seem to match.</div>
+                <div id="success-register" class="hidden">Successfully registered!</div>
+                <div id="fill-all-fields" class="hidden">Fill all the fields, please. </div>
+                <button id="register-btn">Register</button>
+                <button id="return-from-reg">Main Menu</button>
+            </div>
+        </div>
+        <div id="game" >
+            <div id="choose-diff">
+                <h2 id="choose-diff-header">Choose Difficulty!</h2>
+                <div class="buttons">
+                    <button class="difficulty" id="easy">Easy</button>
+                    <button class="difficulty" id="medium">Medium</button>
+                    <button class="difficulty" id="hard">Hard</button>
+                </div>
+                <button id="return-from-diff">Main Menu</button>
+        </div>
+        <div id="game-on">
+<div id="board">
+</div>
+<div id="digits"> <div class="row">
+    <div class="cell fill" draggable="true">1</div>
+    <div class="cell fill" draggable="true">2</div>
+    <div class="cell fill" draggable="true">3</div>
+    <div class="cell fill" draggable="true">4</div>
+    <div class="cell fill" draggable="true">5</div>
+    <div class="cell fill" draggable="true">6</div>
+    <div class="cell fill" draggable="true">7</div>
+    <div class="cell fill" draggable="true">8</div>
+    <div class="cell fill" draggable="true">9</div>
+</div></div>
+<div class="buttons">
+    <div id="timer">00:00</div>
+    <div id="difficulty-display"></div>
+    <button id="return-from-game">Main Menu</button>
+</div>
+        </div>
+    </div>
+</div>
+<div id="instructions">
+    <div id="instructions-inner">
+        <p>Sudoku is a number-placement puzzle. The objective is to fill a 9×9 grid with digits so that each column, each row, and each of the nine 3×3 subgrids that compose the grid contain all of the digits from 1 to 9.</p>
+        <p>To place the numbers, drag and drop them from the bottom line to the board. </p>
+        <button id="close-instructions">Continue</button>
+    </div>
+</div>
+<div id="delete-div">Drop number outisde of the board to discard it</div>
+<div id="win-div">
+    <div id="win-div-buttons">
+        <button id="new-game">New Game</button>
+        <button id="return-from-win">Main Menu</button>
+    </div>
+</div>
+    <script src="./main.js"></script>
+</body>
+</html>

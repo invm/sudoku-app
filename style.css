@@ -1,0 +1,367 @@
+html {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url("./1.webp");
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Ubuntu', sans-serif;
+    overflow-y: hidden; 
+}
+
+#welcome {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+    font-size: 2vw;
+    color: rgb(194, 18, 18);
+    user-select: none;
+    text-shadow: 0 0 3px black;
+    width: 100%;
+    height: 80vh;
+}
+#welcome > .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+button {
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    width: fit-content;
+    font-size:2vw;
+    padding: 2.5%;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 5px gray;
+    background: linear-gradient(to right bottom, rgb(255, 6, 234), rgb(255, 115, 0) );
+    margin:5%;
+    user-select: none;
+}
+
+button:active {
+    background: linear-gradient(to right bottom, rgb(218, 3, 200), rgb(223, 164, 2));
+}
+
+.hidden {
+    animation: fadeout 0.3s ease-in; 
+    opacity: 0;
+}
+.visible {
+    animation: fadein 1s ease-in;
+}
+
+#login-form {
+    display: none;
+    margin-top: 10vh;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 40vh;
+    font-size:2vw;
+    line-height: 2vh;
+}
+#login-form > button {
+    padding: 2.5%;
+    margin-top: 5%;
+}
+
+#register-form {
+    display: none;
+    margin-top: 10vh;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 50vh;
+    font-size:2vw;
+}
+
+input {
+    text-align: center;
+    margin-bottom: 5%;
+    font-size: 1.3vw;
+    user-select: none;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+#game {
+    display: none;
+}
+#choose-diff {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 2vw;
+    color: rgb(194, 18, 18);
+    text-shadow: 0 0 3px black;
+    user-select: none;
+}
+
+#game > #choose-diff > .buttons {
+    width: 60vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#game-on {
+    display: none;
+    width: 42vw;
+    background: rgba(255, 255, 255, 0.233);
+    height: 42vw;
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 3vw;
+    padding-bottom: 2vw;
+}
+@media only screen and (max-width: 800px) {
+
+}
+
+@media only screen and (max-width: 800px) {
+    #game-on {
+        width: 80vw;
+        height: 80vw;
+        font-size: 10vw;
+    }
+    #board > .row > .cell{
+        font-size: 5.8vw;
+    }
+    #game-on > #digits > .row > .cell {
+        font-size: 5.8vw;
+    }
+    button {
+        font-size:5vw;
+    }
+    #welcome {
+        font-size: 7vw;
+    }
+    #choose-diff { 
+        font-size: 6vw;
+    }
+
+#instructions {
+    display: none;
+    /* position: absolute; */
+    top: 10%;
+    width: 80%;
+    height: 80%;
+}
+#root > #delete-div {
+    text-align: center;
+    position: absolute;
+    border-radius: 25px;
+    width: 100vw;
+    height: 100vh;
+    font-size: 20vw;
+    line-height: 9vw;
+}
+
+#instructions > #instructions-inner {
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    font-size: 4vw;
+    /* padding: 0 2%; */
+}
+
+  }
+
+#timer {
+    margin-top: 4%;
+    color: rgb(218, 3, 200);
+    font-weight: 700;
+    font-size: 4.2vw;
+}
+
+#difficulty-display {
+    text-align: center;
+    margin-top: 4%;
+    color: rgb(218, 3, 200);
+    font-weight: 500;
+    font-size: 2vw;
+}
+
+#board {
+    width: 80%;
+    height: 80%;
+}
+
+.row {
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    height: 10%;
+}
+.cell {
+    width: 32%;
+    height: 100%;
+    background: linear-gradient(to right bottom, rgba(58, 127, 255, 0.226) 10%, rgb(144, 178, 252));
+    border: 1px solid black;
+    color: black;
+    font-weight: 800;
+    text-align: center;
+    font-size: 3vw;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out; 
+}
+#digits > .row > .cell {
+    width: 32%;
+    height: 100%;
+    background: linear-gradient(to right bottom, rgba(58, 127, 255, 0.226) 10%, rgb(144, 178, 252));
+    border: 1px solid black;
+    color: black;
+    font-weight: 800;
+    text-align: center;
+    font-size: 3vw;
+    user-select: none;
+    cursor: pointer;
+}
+
+.static {
+    cursor: auto;
+    color: rgb(53, 53, 53);
+}
+
+.empty {
+    cursor: auto;
+}
+.cell.fill.on-board:hover{
+    color: rgb(255, 221, 158);
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black; 
+}
+
+.hovered {
+    background: linear-gradient(to right bottom, rgba(19, 48, 104, 0.226) 10%, rgb(35, 50, 83));
+}
+
+.red-hover {
+    background: rgba(255, 0, 0, 0.336);
+}
+
+.hold {
+    background: linear-gradient(to right bottom, rgba(58, 127, 255, 0.466), rgba(0, 140, 255, 0.493));
+}
+
+.invisible {
+    display: none;
+}
+
+#board > .row:nth-child(3n){
+    margin-bottom:1.5%;
+}
+
+#board > .row > .cell:first-child{
+    margin-left: 0.75%;
+}
+
+#board > .row > .cell:nth-child(3n){
+    margin-right:0.75%;
+}
+#game-on > .buttons {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#digits > .row {
+    height: 100%;
+}
+
+#digits{
+    margin-top: 1%;
+    height: 8%;
+    width: 80% ;
+}
+
+#instructions {
+    display: none;
+    position: absolute;
+    top: 20%;
+}
+#delete-div {
+    display: none;
+    text-align: center;
+    position: absolute;
+    border-radius: 25px;
+    top: 30%;
+    width: 90%;
+    height: 7vw;
+    background: rgb(255, 255, 255);
+    font-size: 4vw;
+    line-height: 7vw;
+}
+#win-div {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    border-radius: 25px;
+    top: 5%;
+    width: 90%;
+    height: 50vw;
+    color: white;
+    background: linear-gradient(to right bottom, rgb(255, 6, 234), rgb(255, 115, 0) );
+    font-size: 10vw;
+    line-height: 12vw;
+}
+
+#win-div-buttons {
+    text-align: center;
+    position: relative;
+    border-radius: 25px;
+    width: 60%;
+    height: 10vw;
+    background: rgb(255, 255, 255);
+    font-size: 4vw;
+    line-height: 7vw;
+}
+
+#instructions-inner {
+    background: white;
+    width: 60vw;
+    height: 30vw;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    font-size: 2vw;
+    padding: 0 2%;
+}
+
+#close-instructions {
+    position: relative;
+    margin-bottom: 2%;
+}
