@@ -1,5 +1,7 @@
 # Sudoku App
 
+[Sudoku App](https://mikes-sudoku-app.tk)
+
 A simple sudoku app built with pure JS, HTML and CSS, no backend.
 
 The game includes the option to register and login, but the data will be gone once the app page is refreshed.
@@ -32,5 +34,5 @@ Feel free to contibute, all PRs are welcome.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/invm/sudoku-app/blob/master/LICENSE) file for details
 

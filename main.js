@@ -12,7 +12,6 @@ let board = document.querySelector('#board');
 let timer = document.querySelector('#timer');
 let difficultyDisplay = document.querySelector('#difficulty-display');
 let instructions = document.querySelector('#instructions');
-let deleteDiv = document.querySelector('#delete-div');
 let winDiv = document.querySelector('#win-div');
 
 // Buttons
@@ -29,6 +28,7 @@ let returnFromLogin = document.querySelector('#return-from-login');
 let returnFromDiff = document.querySelector('#return-from-diff');
 let returnFromGame = document.querySelector('#return-from-game');
 let returnFromWin = document.querySelector('#return-from-win');
+let newGame = document.querySelector('#new-game');
 
 let regForm = document.querySelector('#register-form');
 let loginForm = document.querySelector('#login-form');
@@ -94,7 +94,7 @@ register.addEventListener('click',function() {
     setTimeout(function(){
       switchDisplay(loginDiv,welcome);
       regForm.setAttribute("style", "display:none;");
-    },500);
+    },1000);
     setTimeout(function(){
       document.querySelector('#username').value = "";
       document.querySelector('#password').value = "";
@@ -130,8 +130,8 @@ login.addEventListener('click',function() {
     let noSuchUser = document.querySelector('#no-such-user');
     displayForTime(noSuchUser,2000);
   } else {
-    let loginUsername = document.querySelector('#loginUsername').value;
-    let loginPassword = document.querySelector('#loginPassword').value;
+    let loginUsername = document.querySelector('#login-username').value;
+    let loginPassword = document.querySelector('#login-password').value;
     let i,j;
     for (i = 0; users[i] != loginUsername && i < passwords.length; i++);
     for (j = 0; passwords[j] != loginPassword && j < passwords.length; j++);
@@ -164,8 +164,12 @@ returnFromDiff.addEventListener('click',function() {
   switchDisplay(game,welcome);
 })
 
-returnFromDiff.addEventListener('click',function() {
+returnFromWin.addEventListener('click',function() {
   switchDisplay(winDiv,welcome);
+})
+
+newGame.addEventListener('click',function () {
+  switchDisplay(winDiv,chooseDiff);
 })
 
 //Return from board mode to main menu 
@@ -291,7 +295,6 @@ let revealedSudoku = [];
 const generateBoard = (difficulty) => {
   sudoku = generateSudoku();
   reveal(difficulty,sudoku);
-  displayForTime(deleteDiv,5000)
   startTimer();
   empties = document.querySelectorAll('.empty');
   for(const empty of empties){
@@ -377,16 +380,17 @@ function timerSet() {
 }
 
 const colorRow = (i) => {
-  board.children[i].className += ' red-hover'
+  if (!board.children[i].classList.add('red-hover'))
+    board.children[i].classList.add('red-hover');
 }
 const colorColumn = (j) =>{
-  let boardRows = Array.from(board.children);
   for (let i = 0; i < board.children.length; i++) {
-    board.children[i].children[j].className += ' red-hover';
+    if(!board.children[i].children[j].classList.add('red-hover'))
+      board.children[i].children[j].classList.add('red-hover');
   }
 }
 
-const colorBlock = (mati,matj) => {
+const colorBlock = (color,mati,matj) => {
   let k,l;
   if (mati <= 2) k = 0;
   else if (mati <= 5) k = 3;
@@ -394,9 +398,15 @@ const colorBlock = (mati,matj) => {
   if (matj <= 2) l = 0;
   else if (matj <= 5) l = 3;
   else if (matj <= 8) l = 6;
-  for (let i = k; i < k + 3 ; i++)
-    for (let j = l; j < l + 3; j++)
-        board.children[i].children[j].className += ' red-hover';
+  if (color){
+    for (let i = k; i < k + 3 ; i++)
+      for (let j = l; j < l + 3; j++)
+          board.children[i].children[j].className += ' red-hover';
+  } else {
+    for (let i = k; i < k + 3 ; i++)
+      for (let j = l; j < l + 3; j++)
+          board.children[i].children[j].classList.remove('red-hover');
+  }
 }
 
 const blockIsColored = (mati,matj) => {
@@ -414,20 +424,6 @@ const blockIsColored = (mati,matj) => {
   return true;
 }
 
-const colorBlockBack = (mati,matj) => {
-  let k,l;
-  if (mati <= 2) k = 0;
-  else if (mati <= 5) k = 3;
-  else if (mati <= 8) k = 6;
-  if (matj <= 2) l = 0;
-  else if (matj <= 5) l = 3;
-  else if (matj <= 8) l = 6;
-  for (let i = k; i < k + 3 ; i++)
-    for (let j = l; j < l + 3; j++)
-        if(!board.children[i].children[j].classList.contains('red-hover'))
-          board.children[i].children[j].classList.remove('red-hover')
-}
-
 var fills = document.querySelectorAll('.fill');
 
 // Fill listeners
@@ -442,9 +438,9 @@ for (const fill of fills) {
 let hold;
 
 function dragStart(e) {
-  if (blockIsColored(e.target.id[0],e.target.id[1])){
-    colorBlockBack(e.target.id[0],e.target.id[1])
-  }
+  // if (blockIsColored(e.target.id[0],e.target.id[1])){
+  //   colorBlockBack(e.target.id[0],e.target.id[1])
+  // }
   if (this.classList.contains('on-board')){
     // console.log(e.target.id[0],e.target.id[1])
     this.className = 'cell fill hold';
@@ -455,6 +451,14 @@ function dragStart(e) {
         this.className = 'cell empty';
         this.setAttribute('draggable','false');
         revealedSudoku[Number(hold.id[0])][Number(hold.id[1])] = 0;
+        if(!blockIsColored(hold.id[0],hold.id[1]))
+          colorBlock(0,hold.id[0],hold.id[0]);
+        if(board.children[hold.id[0]].classList.contains('red-hover'))
+          board.children[hold.id[0]].classList.remove('red-hover')
+        if(board.children[hold.id[0]].children[hold.id[1]].classList.contains('red-hover'))
+          for (let i = 0; i < 9; i++){
+            board.children[i].classList.remove('red-hover')
+          }
       }, 2000);
   } else {
     this.className = 'cell fill hold';
@@ -462,7 +466,7 @@ function dragStart(e) {
 
   }
   if (this.parentNode.classList.contains('hovered')) {
-    this.parentNode.className = 'cell empty';
+    this.parentNode.classList.remove('hovered');
   }
 }
 
@@ -490,14 +494,16 @@ function dragOver(e) {
   }
   if (blockIncludes(revealedSudoku,i,j,num)) {
     if(!blockIsColored(i,j))
-      if (!board.children[i].children[j].classList.contains('red-hover'))
-        colorBlock(i,j);
+      colorBlock(1,i,j);
+    if (!blockIncludes(revealedSudoku,i,j,num) && blockIsColored(i,j))
+      colorBlock(0,i,j)
   }
 }
 
 function dragEnter(e) {
   e.preventDefault();
-  this.className += ' hovered';
+  if (!this.classList.contains('hovered'))
+    this.classList.add('hovered');
 }
 
 function dragLeave(e) {
@@ -508,9 +514,11 @@ function dragLeave(e) {
       this.className = 'cell empty';
     } 
   }
+  if(!blockIsColored(e.target.id[0],e.target.id[1]))
+    colorBlock(0,e.target.id[0],e.target.id[1]);
   let num = Number(hold.innerHTML);
   if (board.children[this.id[0]].classList.contains('red-hover')){
-    board.children[this.id[0]].className = 'row';
+    board.children[this.id[0]].classList.remove('red-hover');
   } 
   if (columnIncludes(revealedSudoku,this.id[1],num)) {
     for (let i = 0; i < board.children.length; i++) {
