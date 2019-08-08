@@ -47,13 +47,18 @@ button {
     color: white;
     cursor: pointer;
     box-shadow: 0 0 5px gray;
-    background: linear-gradient(to right bottom, rgb(255, 6, 234), rgb(255, 115, 0) );
+    background: linear-gradient(to right bottom, rgb(125, 0, 197), rgb(255, 0, 0) );
     margin:5%;
     user-select: none;
+    transition: 0.1s ease-in-out;
 }
 
 button:active {
-    background: linear-gradient(to right bottom, rgb(218, 3, 200), rgb(223, 164, 2));
+    background: linear-gradient(to right bottom, rgb(108, 0, 170), rgb(207, 1, 1) );
+}
+button:hover {
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    border-radius: 15px;
 }
 
 .hidden {
@@ -94,7 +99,7 @@ button:active {
 input {
     text-align: center;
     margin-bottom: 5%;
-    font-size: 0.7em;
+    font-size: 0.8em;
     user-select: none;
 }
 
@@ -206,8 +211,10 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center; 
-    font-size: 1.1em;
+    text-align: center;
+    font-size: 1.6em;
     padding: 0 2%;
+    user-select: none;
 }
 
 #timer {
@@ -216,6 +223,7 @@ input {
     text-shadow: -1px 0 rgb(0, 0, 0), 0 -1px rgb(0, 0, 0), 1px 0 rgb(0, 0, 0), 0 1px rgb(0, 0, 0);
     font-weight: 700;
     font-size: 2.5em;
+    user-select: none;
 }
 
 #difficulty-display {
@@ -225,6 +233,7 @@ input {
     text-shadow: -1px 0 rgb(0, 0, 0), 0 -1px rgb(0, 0, 0), 1px 0 rgb(0, 0, 0), 0 1px rgb(0, 0, 0);
     font-weight: 500;
     font-size: 2.5em;
+    user-select: none;
 }
 
 #board {
@@ -250,7 +259,7 @@ input {
     text-align: center;
     font-size: 3vw;
     user-select: none;
-    cursor: pointer;
+    /* cursor: pointer; */
     transition: 0.3s ease-in-out; 
 }
 #digits > .row > .cell {
@@ -275,6 +284,7 @@ input {
     cursor: auto;
 }
 .cell.fill.on-board:hover{
+    cursor: pointer;
     color: rgb(255, 221, 158);
     text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black; 
 }

@@ -45,12 +45,6 @@ closeInsctrucitons.addEventListener('click',function() {
 
 //Display element functions
 
-const display = (element) => {
-  element.setAttribute("style", "display:block;");
-  element.classList.remove('hidden');
-  element.classList.add('visible');
-}
-
 const displayForTime = (element,ms) => {
   element.setAttribute("style", "display:block;");
   element.classList.remove('hidden');
@@ -59,6 +53,17 @@ const displayForTime = (element,ms) => {
     element.classList.remove('visible');
     element.classList.add('hidden');
     element.setAttribute("style", "display:none;");
+  },ms)
+}
+
+const visibleForTime = (element,ms) => {
+  element.setAttribute("style", "display:block;");
+  element.classList.remove('hidden');
+  element.classList.add('visible');
+  setTimeout(function() {
+    element.classList.remove('visible');
+    element.classList.add('hidden');
+    // element.setAttribute("style", "display:none;");
   },ms)
 }
 
@@ -103,10 +108,10 @@ register.addEventListener('click',function() {
 
   } else if (password != password2){
     let passDontMatch = document.querySelector('#pass-dont-match')
-    displayForTime(passDontMatch,3000);
+    visibleForTime(passDontMatch,3000);
   } else {
     let fillAllFields = document.querySelector('#fill-all-fields')
-    displayForTime(fillAllFields,3000);
+    visibleForTime(fillAllFields,3000);
     
   }
   
@@ -126,22 +131,24 @@ loginBtn.addEventListener('click', function() {
 })
 
 login.addEventListener('click',function() {
-  if (users.length == 0){
+  let loginUsername = document.querySelector('#login-username').value;
+  if (users.length == 0 || !users.includes(loginUsername)){
     let noSuchUser = document.querySelector('#no-such-user');
-    displayForTime(noSuchUser,2000);
+    visibleForTime(noSuchUser,2000);
   } else {
-    let loginUsername = document.querySelector('#login-username').value;
-    let loginPassword = document.querySelector('#login-password').value;
-    let i,j;
-    for (i = 0; users[i] != loginUsername && i < passwords.length; i++);
-    for (j = 0; passwords[j] != loginPassword && j < passwords.length; j++);
-    if (i == j) {
+    if (users.includes(loginUsername)){
+      let loginPassword = document.querySelector('#login-password').value;
+      let i,j;
+      for (i = 0; users[i] != loginUsername && i < passwords.length; i++);
+      for (j = 0; passwords[j] != loginPassword && j < passwords.length; j++);
+      if (i == j) {
       switchDisplay(loginDiv,game); 
       displayForTime(instructions,20000);
     } else {
       let passDontMatch = document.querySelector('#pass-dont-match-on-login');
-      displayForTime(passDontMatch,2000);
+      visibleForTime(passDontMatch,2000);
     }
+    } 
   }
 })
 
@@ -154,7 +161,7 @@ returnFromLogin.addEventListener('click',function() {
 
 guestBtn.addEventListener('click', function() {
   switchDisplay(welcome,game);
-  displayForTime(instructions,20000);
+  displayForTime(instructions,15000);
 
 })
 
