@@ -157,8 +157,7 @@ input {
         overflow-y: auto;
         background-position: center;
         background-repeat: no-repeat;
-        background-position-x: center;
-        background-position-y: center;
+        height: 100%
     }
     #game-on {
         width: 99vw;
