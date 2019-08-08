@@ -41,7 +41,7 @@ button {
     outline: none;
     border-radius: 25px;
     width: fit-content;
-    font-size: 1em;
+    font-size: 1.5em;
     padding: 2.5%;
     font-weight: 600;
     color: white;
@@ -151,13 +151,14 @@ input {
     padding-bottom: 2vw;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1080px) {
 
     body {
         overflow-y: auto;
         background-position: center;
         background-repeat: no-repeat;
-        background-size: cover;
+        background-position-x: center;
+        background-position-y: center;
     }
     #game-on {
         width: 99vw;
@@ -215,16 +216,16 @@ input {
     color: rgb(255, 255, 255);
     text-shadow: -1px 0 rgb(0, 0, 0), 0 -1px rgb(0, 0, 0), 1px 0 rgb(0, 0, 0), 0 1px rgb(0, 0, 0);
     font-weight: 700;
-    font-size: 4.2vw;
+    font-size: 2.5em;
 }
 
 #difficulty-display {
     text-align: center;
-    margin-top: 4%;
+    margin-left: 2%;
     color: rgb(255, 255, 255);
     text-shadow: -1px 0 rgb(0, 0, 0), 0 -1px rgb(0, 0, 0), 1px 0 rgb(0, 0, 0), 0 1px rgb(0, 0, 0);
     font-weight: 500;
-    font-size: 1.6em;
+    font-size: 2.5em;
 }
 
 #board {

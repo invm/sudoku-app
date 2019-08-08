@@ -322,9 +322,8 @@ const reveal = (difficulty,sudoku) => {
   }
   for (let i = 0; i < 9 ;i++){
     revealedSudoku[i] = [];
-    for (let j = 0; j < 9; j++){
+    for (let j = 0; j < 9; j++)
       revealedSudoku[i][j] = 0;
-    }
   }
 
   sudoku.forEach((row,i) => {
@@ -333,9 +332,8 @@ const reveal = (difficulty,sudoku) => {
       if (revealedArray[i * 9 + j]){
         boardContent += `<div class="cell static" >${value}</div>`;
         revealedSudoku[i][j] = value;
-      } else {
+      } else 
         boardContent += `<div class="cell empty" id="${i}${j}"></div>`;
-      }
     })
     boardContent += '</div>';
   })
@@ -363,16 +361,12 @@ function timerSet() {
       time++;
       let min = Math.floor(time/60)
       let sec = Math.floor(time%60);
-
-      if (min < 10) {
+      if (min < 10) 
         min = "0" + min;
-      } 
-      if (sec >=60 ) {
+      if (sec >=60 ) 
         sec = sec % 60;
-      } 
-      if (sec < 10) {
+      if (sec < 10) 
         sec = "0" + sec;
-      }
       timer.innerHTML = min + ":" + sec;
       timerSet();
     },1000)
@@ -384,10 +378,9 @@ const colorRow = (i) => {
     board.children[i].classList.add('red-hover');
 }
 const colorColumn = (j) =>{
-  for (let i = 0; i < board.children.length; i++) {
+  for (let i = 0; i < board.children.length; i++) 
     if(!board.children[i].children[j].classList.add('red-hover'))
       board.children[i].children[j].classList.add('red-hover');
-  }
 }
 
 const colorBlock = (color,mati,matj) => {
@@ -398,15 +391,14 @@ const colorBlock = (color,mati,matj) => {
   if (matj <= 2) l = 0;
   else if (matj <= 5) l = 3;
   else if (matj <= 8) l = 6;
-  if (color){
+  if (color)
     for (let i = k; i < k + 3 ; i++)
       for (let j = l; j < l + 3; j++)
           board.children[i].children[j].className += ' red-hover';
-  } else {
+  else 
     for (let i = k; i < k + 3 ; i++)
       for (let j = l; j < l + 3; j++)
           board.children[i].children[j].classList.remove('red-hover');
-  }
 }
 
 const blockIsColored = (mati,matj) => {
@@ -438,11 +430,7 @@ for (const fill of fills) {
 let hold;
 
 function dragStart(e) {
-  // if (blockIsColored(e.target.id[0],e.target.id[1])){
-  //   colorBlockBack(e.target.id[0],e.target.id[1])
-  // }
   if (this.classList.contains('on-board')){
-    // console.log(e.target.id[0],e.target.id[1])
     this.className = 'cell fill hold';
     hold = document.querySelector('.hold');
     empties++;
@@ -456,27 +444,22 @@ function dragStart(e) {
         if(board.children[hold.id[0]].classList.contains('red-hover'))
           board.children[hold.id[0]].classList.remove('red-hover')
         if(board.children[hold.id[0]].children[hold.id[1]].classList.contains('red-hover'))
-          for (let i = 0; i < 9; i++){
+          for (let i = 0; i < 9; i++)
             board.children[i].classList.remove('red-hover')
-          }
       }, 2000);
   } else {
     this.className = 'cell fill hold';
     hold = document.querySelector('.hold');
-
   }
-  if (this.parentNode.classList.contains('hovered')) {
+  if (this.parentNode.classList.contains('hovered')) 
     this.parentNode.classList.remove('hovered');
-  }
 }
 
 function dragEnd(e) {
-  if (e.target.parentNode.parentNode == board){
+  if (e.target.parentNode.parentNode == board)
     this.className = 'cell fill on-board';
-  } else  {
+  else  
     this.className = 'cell fill';
-  }
-
 }
 
 function dragOver(e) {
@@ -484,14 +467,12 @@ function dragOver(e) {
   let i = this.id[0];
   let j = this.id[1];
   let num = Number(hold.innerHTML);
-  if (columnIncludes(revealedSudoku,j,num)) {
+  if (columnIncludes(revealedSudoku,j,num)) 
     if (!board.children[i].children[j].classList.contains('red-hover'))
       colorColumn(j);
-  } 
-  if (revealedSudoku[i].includes(num)){
+  if (revealedSudoku[i].includes(num))
     if (!board.children[i].classList.contains('red-hover'))
       colorRow(i);
-  }
   if (blockIncludes(revealedSudoku,i,j,num)) {
     if(!blockIsColored(i,j))
       colorBlock(1,i,j);
@@ -507,30 +488,23 @@ function dragEnter(e) {
 }
 
 function dragLeave(e) {
-  if (e.target.classList.contains('hovered')){
-    if (e.target.classList.contains('static')){
+  if (e.target.classList.contains('hovered'))
+    if (e.target.classList.contains('static'))
       this.className = 'cell static';
-    } else if (e.target.classList.contains('empty')){
+    else if (e.target.classList.contains('empty'))
       this.className = 'cell empty';
-    } 
-  }
   if(!blockIsColored(e.target.id[0],e.target.id[1]))
     colorBlock(0,e.target.id[0],e.target.id[1]);
   let num = Number(hold.innerHTML);
-  if (board.children[this.id[0]].classList.contains('red-hover')){
+  if (board.children[this.id[0]].classList.contains('red-hover'))
     board.children[this.id[0]].classList.remove('red-hover');
-  } 
-  if (columnIncludes(revealedSudoku,this.id[1],num)) {
-    for (let i = 0; i < board.children.length; i++) {
-      if (board.children[i].children[this.id[1]].classList.contains('red-hover')){
-        if (board.children[i].children[this.id[1]].classList.contains('static')){
+  if (columnIncludes(revealedSudoku,this.id[1],num)) 
+    for (let i = 0; i < board.children.length; i++) 
+      if (board.children[i].children[this.id[1]].classList.contains('red-hover'))
+        if (board.children[i].children[this.id[1]].classList.contains('static'))
           board.children[i].children[this.id[1]].className = 'cell static';
-        } else {
+        else 
           board.children[i].children[this.id[1]].className = 'cell';
-        }
-      }
-    }
-  }
 }
 
 function dragDrop(e) {
@@ -541,21 +515,19 @@ function dragDrop(e) {
     revealedSudoku[Number(e.target.id[0])][Number(e.target.id[1])] = Number(hold.innerText)
     revealedSudoku.forEach(row => {
       row.forEach(value => {
-        if (value == 0){
+        if (value == 0)
           empties++;
-        }
       })
     });
-  } else {
+  } else 
     empties--;
-  }
   this.innerHTML = `${hold.innerText}`;
   fills = document.querySelectorAll('.fill');
   for (const fill of fills) {
     fill.addEventListener('dragstart', dragStart);
     fill.addEventListener('dragend', dragEnd);
   }
-  if (empties == 0) {
+  if (empties == 0)
     if (checkSudoku (sudoku, revealedSudoku)){
       stopTimer ();
       let finishTime = Math.floor(time/60) + ":" + Math.floor(time%60);
@@ -563,18 +535,14 @@ function dragDrop(e) {
       winDiv.prepend(content);
       switchDisplay (game, winDiv);
     }
-  }
 }
 
 function checkSudoku (originalSudoku, newSudoku) {
   let flag = true;
-  for (let i = 0; i < 9 && flag; i++) {
-    for (let j = 0; j < 9 && flag; j++){
-      if (originalSudoku[i][j] != newSudoku[i][j]){
+  for (let i = 0; i < 9 && flag; i++) 
+    for (let j = 0; j < 9 && flag; j++)
+      if (originalSudoku[i][j] != newSudoku[i][j])
         flag = false;
-      }
-    }
-  } 
   return flag;
 } 
 
