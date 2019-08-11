@@ -1,4 +1,3 @@
-/* ------------------------------ Event listeners ------------------------------ */ 
 
 // Divs
 
@@ -28,6 +27,7 @@ let returnFromLogin = document.querySelector('#return-from-login');
 let returnFromDiff = document.querySelector('#return-from-diff');
 let returnFromGame = document.querySelector('#return-from-game');
 let returnFromWin = document.querySelector('#return-from-win');
+
 let newGame = document.querySelector('#new-game');
 
 let regForm = document.querySelector('#register-form');
@@ -38,10 +38,6 @@ let medium = document.querySelector('#medium');
 let hard = document.querySelector('#hard');
 
 let closeInsctrucitons = document.querySelector('#close-instructions');
-
-closeInsctrucitons.addEventListener('click',function() {
-  instructions.style.display = "none";
-})
 
 //Display element functions
 
@@ -75,6 +71,8 @@ const switchDisplay = (from, to) => {
   to.classList.remove('hidden');
   to.classList.add('visible');
 }
+
+/* ------------------------------ Event listeners ------------------------------ */ 
 
 
 // Register form actions
@@ -139,7 +137,7 @@ login.addEventListener('click',function() {
     if (users.includes(loginUsername)){
       let loginPassword = document.querySelector('#login-password').value;
       let i,j;
-      for (i = 0; users[i] != loginUsername && i < passwords.length; i++);
+      for (i = 0; users[i] != loginUsername && i < users.length; i++);
       for (j = 0; passwords[j] != loginPassword && j < passwords.length; j++);
       if (i == j) {
       switchDisplay(loginDiv,game); 
@@ -186,6 +184,10 @@ returnFromGame.addEventListener('click',function() {
   switchDisplay(game,welcome);
   stopTimer();
   resetTimer();
+})
+
+closeInsctrucitons.addEventListener('click',function() {
+  instructions.style.display = "none";
 })
 
 let difficulty;
@@ -269,7 +271,7 @@ const generateRow = (sudoku,rowNum) => {
         if (blockFlag)
           return row;
          else
-          if (tries == 300)
+          if (tries == 50)
             return false;
           else 
             tries++;
@@ -423,9 +425,10 @@ const blockIsColored = (mati,matj) => {
   return true;
 }
 
-var fills = document.querySelectorAll('.fill');
 
 // Fill listeners
+
+var fills = document.querySelectorAll('.fill');
 
 for (const fill of fills) {
     fill.addEventListener('dragstart', dragStart);
@@ -434,7 +437,7 @@ for (const fill of fills) {
 
 // Drag Functions
 
-let hold;
+let hold; // current hold element
 
 function dragStart(e) {
   if (this.classList.contains('on-board')){
